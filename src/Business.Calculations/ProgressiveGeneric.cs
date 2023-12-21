@@ -1,5 +1,4 @@
-﻿namespace Business.Calculations;
-using System.Numerics;
+﻿using System.Numerics;
 
 public class Progressive<T, TMultiplier>
     where T :
