@@ -44,15 +44,9 @@ public class Progressive<T, TMultiplier>
     {
         private List<Bracket> brackets;
 
-        public BracketRateBuilder(List<Bracket> brackets)
-        {
-            this.brackets = brackets;
-        }
+        public BracketRateBuilder(List<Bracket> brackets) => this.brackets = brackets;
 
-        public ToBuilder From(T fromValue)
-        {
-            return new ToBuilder(brackets, fromValue);
-        }
+        public ToBuilder From(T fromValue) => new ToBuilder(brackets, fromValue);
 
         public RateBuilder UpTo(T toValue) => From(Zero).UpTo(toValue);
     }
@@ -61,15 +55,9 @@ public class Progressive<T, TMultiplier>
     {
         private List<Bracket> brackets;
 
-        public FromBuilder(List<Bracket> brackets)
-        {
-            this.brackets = brackets;
-        }
+        public FromBuilder(List<Bracket> brackets) => this.brackets = brackets;
 
-        public ToBuilder From(T fromValue)
-        {
-            return new ToBuilder(brackets, fromValue);
-        }
+        public ToBuilder From(T fromValue) => new ToBuilder(brackets, fromValue);
 
         public RateBuilder UpTo(T toValue) => From(brackets.Last().To).UpTo(toValue);
 
@@ -80,20 +68,14 @@ public class Progressive<T, TMultiplier>
             return new ResultBuilder(brackets);
         }
 
-        public ResultBuilder Capped()
-        {
-            return new ResultBuilder(brackets);
-        }
+        public ResultBuilder Capped() => new ResultBuilder(brackets);
     }
 
     public class ResultBuilder
     {
         private List<Bracket> brackets;
 
-        public ResultBuilder(List<Bracket> brackets)
-        {
-            this.brackets = brackets;
-        }
+        public ResultBuilder(List<Bracket> brackets) => this.brackets = brackets;
 
         public BracketCalculationResult Calculate(T value)
         {
@@ -151,6 +133,7 @@ public class Progressive<T, TMultiplier>
     public class BracketsAccumulator
     {
         public T Remaining;
+
         public List<BracketAllocation> BracketsAllocation = new();
 
         public class BracketAllocation
@@ -185,15 +168,9 @@ public class Progressive<T, TMultiplier>
             this.brackets = brackets;
         }
 
-        internal RateBuilder UpTo(T toValue)
-        {
-            return new RateBuilder(brackets, fromValue, toValue, false);
-        }
+        internal RateBuilder UpTo(T toValue) => new RateBuilder(brackets, fromValue, toValue, false);
 
-        internal RateBuilder UpToInfinity()
-        {
-            return new RateBuilder(brackets, fromValue, new T(), true);
-        }
+        internal RateBuilder UpToInfinity() => new RateBuilder(brackets, fromValue, new T(), true);
     }
 
     public class RateBuilder
@@ -213,7 +190,14 @@ public class Progressive<T, TMultiplier>
 
         public FromBuilder MultiplyBy(TMultiplier multiplier)
         {
-            brackets.Add(new Bracket { From = fromValue, To = toValue, Multiplier = multiplier, ToInfinity = toInfinity });
+            brackets.Add(new Bracket
+            {
+                From = fromValue,
+                To = toValue,
+                Multiplier = multiplier,
+                ToInfinity = toInfinity
+            });
+
             return new FromBuilder(brackets);
         }
     }
