@@ -1,4 +1,5 @@
 ﻿using Business.Calculations;
+using Fluent.Calculations.Primitives.BaseTypes;
 using FluentAssertions;
 
 namespace Fluent.Calculations.Business.Tests
@@ -22,7 +23,7 @@ namespace Fluent.Calculations.Business.Tests
         [Fact]
         public void Test2()
         {
-            var progressive = new Progressive<decimal, decimal>()
+            var progressive = new Progressive<Number, Number>()
                 .UpTo(100).MultiplyBy(0.01m)
                 .UpTo(200).MultiplyBy(0.02m)
                 .UpTo(300).MultiplyBy(0.03m)
@@ -30,7 +31,7 @@ namespace Fluent.Calculations.Business.Tests
 
             var result = progressive.Calculate(400);
 
-            result.Amount.Should().Be(6);
+            result.Amount.Primitive.Should().Be(6);
         }
     }
 }

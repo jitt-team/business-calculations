@@ -220,14 +220,10 @@ public class Progressive<T, TMultiplier>
 
     private class Enforce
     {
-        internal static T GreaterThanOrZero(T fromValue)
-        {
-            throw new NotImplementedException();
-        }
+        internal static T GreaterThanOrZero(T fromValue) => fromValue >= Zero ? fromValue :
+            throw new ArgumentOutOfRangeException(nameof(fromValue), "Value shoul be greater than or equal to 0.");
 
-        internal static T GreaterThanZero(T toValue)
-        {
-            throw new NotImplementedException();
-        }
+        internal static T GreaterThanZero(T toValue) => toValue > Zero ? toValue :
+            throw new ArgumentOutOfRangeException(nameof(toValue), "Value shoul be greater than 0.");
     }
 }
